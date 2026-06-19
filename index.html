@@ -3,7 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Điệp & Huệ — Đám Cưới</title>
+  <title>Văn Điệp & Thu Huệ — Đám Cưới</title>
+
+  <!-- Mô tả website -->
+  <meta name="description" content="Hai con đường gặp nhau tại Hà Nội — từ đó, mọi kế hoạch đều có thêm một điểm đến: nhau. Trân trọng mời bạn dự lễ thành hôn Ngô Văn Điệp & Nguyễn Thu Huệ, 28.11.2026." />
+  <meta name="author" content="Văn Điệp & Thu Huệ" />
+  <meta name="theme-color" content="#d4708a" />
+
+  <!-- Open Graph — Facebook, Zalo, Messenger, iMessage... -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="vi_VN" />
+  <meta property="og:site_name" content="Văn Điệp & Thu Huệ — Đám Cưới" />
+  <meta property="og:title" content="Văn Điệp & Nguyễn Thu Huệ — Đám Cưới 28/11/2026" />
+  <meta property="og:description" content="Hai con đường gặp nhau tại Hà Nội — từ đó, mọi kế hoạch đều có thêm một điểm đến: nhau. Trân trọng mời bạn đến chứng kiến ngày Văn Điệp & Thu Huệ về chung một nhà · 28.11.2026 · The Lantern House" />
+  <meta property="og:image" content="images/z7878139309721_0e1851ab1787879ae69109fa46bb017b.jpg" />
+  <meta property="og:image:alt" content="Văn Điệp & Nguyễn Thu Huệ — Đám cưới 28/11/2026" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Văn Điệp & Nguyễn Thu Huệ — Đám Cưới 28/11/2026" />
+  <meta name="twitter:description" content="Gặp nhau giữa Hà Nội mộng mơ, hẹn ước bên sông Hàn — Văn Điệp & Thu Huệ mời bạn chứng kiến ngày chúng tôi về cùng một nhà. 28.11.2026" />
+  <meta name="twitter:image" content="images/z7878139309721_0e1851ab1787879ae69109fa46bb017b.jpg" />
+  <meta name="twitter:image:alt" content="Văn Điệp & Nguyễn Thu Huệ — Đám cưới 28/11/2026" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Special+Elite&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
   <style>
@@ -40,22 +62,118 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 500;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.1rem 3rem;
-      background: rgba(255,245,247,0); backdrop-filter: blur(0);
-      transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
-      border-bottom: 1px solid transparent;
+      gap: 1.5rem;
+      padding: 0.9rem 2.5rem;
+      background: rgba(255,245,247,0.97);
+      border-bottom: 1px solid rgba(212,112,138,0.18);
+      box-shadow: 0 1px 12px rgba(43,22,32,0.06);
+      transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     nav.scrolled {
-      background: rgba(255,245,247,0.9);
-      backdrop-filter: blur(10px);
-      border-color: rgba(212,112,138,0.2);
+      background: rgba(255,245,247,0.97);
+      border-color: rgba(212,112,138,0.18);
+      box-shadow: 0 1px 12px rgba(43,22,32,0.06);
     }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 0.95rem; letter-spacing: 0.1em; color: var(--cream); transition: color 0.4s; font-style: italic; }
-    nav.scrolled .nav-logo { color: var(--amber); }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; color: rgba(255,245,247,0.85); transition: color 0.3s; }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 400; font-style: italic;
+      letter-spacing: 0.04em; line-height: 1.2;
+      color: var(--dark); white-space: nowrap; flex-shrink: 0;
+      transition: color 0.35s ease;
+    }
+    nav.scrolled .nav-logo { color: var(--dark); }
+    .nav-links {
+      display: flex; align-items: center; gap: 1.6rem;
+      list-style: none; margin: 0; padding: 0;
+    }
+    .nav-links a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.92rem; font-weight: 500;
+      letter-spacing: 0.03em; line-height: 1;
+      text-decoration: none; white-space: nowrap;
+      color: var(--mid);
+      transition: color 0.25s ease;
+    }
     nav.scrolled .nav-links a { color: var(--mid); }
     .nav-links a:hover { color: var(--amber) !important; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 44px; height: 44px;
+      background: none; border: 1px solid rgba(212,112,138,0.25);
+      border-radius: 8px; cursor: pointer; padding: 0;
+      flex-shrink: 0;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+    .nav-toggle:hover { border-color: var(--amber); background: rgba(212,112,138,0.06); }
+    .nav-toggle span {
+      display: block; width: 20px; height: 2px;
+      background: var(--dark); border-radius: 1px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    nav.open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
+    nav.open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 960px) {
+      nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.65rem 1rem;
+      }
+      .nav-logo {
+        font-size: 0.88rem;
+        text-align: left;
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        position: relative;
+        z-index: 502;
+      }
+      .nav-toggle { display: flex; position: relative; z-index: 502; }
+
+      .nav-links {
+        position: fixed;
+        inset: 0;
+        z-index: 501;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0;
+        padding: 4.2rem 1.25rem 2rem;
+        background: rgba(255,245,247,0.98);
+        overflow-y: auto;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+      nav.open .nav-links {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+      .nav-links li {
+        border-bottom: 1px solid rgba(212,112,138,0.12);
+      }
+      .nav-links li:last-child { border-bottom: none; }
+      .nav-links a {
+        display: block;
+        font-size: 1.08rem;
+        padding: 0.95rem 0.25rem;
+        letter-spacing: 0.02em;
+      }
+      nav.open { background: rgba(255,245,247,0.98); }
+    }
 
     /* ═══════════════════════════════════════
        HERO — ảnh là nền, text nổi lên trên
@@ -1029,15 +1147,22 @@
       display: block; margin-bottom: 0.55rem;
     }
     .career-quote-punchline {
-      display: block;
+      display: inline-block;
       font-family: 'Playfair Display', serif;
-      font-size: 1.6rem; font-style: italic; font-weight: 700;
-      color: var(--amber);
-      letter-spacing: 0.04em; line-height: 1.4;
-      text-shadow: 0 0 24px rgba(212,112,138,0.6), 0 0 60px rgba(212,112,138,0.2);
-      margin-top: 0.6rem;
-      padding-top: 0.55rem;
-      border-top: 1px solid rgba(212,112,138,0.35);
+      font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+      font-style: italic; font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.04em; line-height: 1.35;
+      margin-top: 0.75rem;
+      padding: 0.7rem 1.15rem;
+      background: rgba(43,22,32,0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(212,112,138,0.55);
+      border-left: 4px solid var(--amber);
+      border-radius: 2px;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.4), 0 0 24px rgba(212,112,138,0.2);
+      text-shadow: none;
     }
     .career-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .career-tags span {
@@ -1354,48 +1479,6 @@
       50%      { opacity:0.45; transform:scale(0.75); }
     }
 
-    /* ── Notification bubble ── */
-    .gift-bubble {
-      position: absolute;
-      right: calc(100% + 14px);
-      top: 50%;
-      transform: translateY(-50%) translateX(10px);
-      background: var(--dark);
-      color: var(--light);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.82rem;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-      padding: 0.55rem 1rem;
-      border-radius: 8px;
-      border: 1px solid rgba(212,112,138,0.5);
-      box-shadow: 0 4px 20px rgba(43,22,32,0.4), 0 0 16px rgba(212,112,138,0.15);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .gift-bubble::after {
-      content: '';
-      position: absolute; top: 50%; right: -7px;
-      transform: translateY(-50%);
-      border: 7px solid transparent;
-      border-left-color: var(--dark);
-      border-right: none;
-    }
-    .gift-bubble.show {
-      opacity: 1;
-      transform: translateY(-50%) translateX(0);
-    }
-    .gift-bubble .bubble-heart {
-      color: #e87070;
-      display: inline-block;
-      animation: heartBeat 2.4s ease-in-out infinite;
-    }
-    @keyframes heartBeat {
-      0%,100% { transform: scale(1); }
-      50%      { transform: scale(1.15); }
-    }
-
     /* ── Nội dung panel ── */
     .gift-close {
       position: absolute; top: 14px; right: 14px;
@@ -1685,7 +1768,7 @@
       transition: max-width 0.45s cubic-bezier(0.22,1,0.36,1),
                   border-color 0.3s ease;
     }
-    .music-player.open { max-width: 340px; border-color: rgba(212,112,138,0.45); }
+    .music-player.open { max-width: 380px; border-color: rgba(212,112,138,0.45); }
 
     /* Nút play/pause — luôn hiển thị */
     .mp-toggle {
@@ -1768,6 +1851,7 @@
       transition: color 0.2s ease;
     }
     .mp-btn:hover { color: var(--amber); }
+    .mp-btn.mp-stop:hover { color: #e87070; }
     .mp-btn:last-child { padding-right: 6px; }
 
     /* ═══════════════════════════════════════
@@ -1855,7 +1939,10 @@
   <!-- NAV -->
   <nav id="nav">
     <div class="nav-logo">Văn Điệp & Thu Huệ</div>
-    <ul class="nav-links">
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Mở menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#careers">Về chúng tôi</a></li>
       <li><a href="#hanoi">Hà Nội</a></li>
       <li><a href="#danang">Đà Nẵng</a></li>
@@ -2194,7 +2281,7 @@
   <div class="cinematic">
     <div class="cinematic-quote">
       <blockquote>"Tình yêu là cuộn phim mà ta không bao giờ muốn rửa xong"</blockquote>
-      <cite>Điệp & Huệ · 2019 — ∞</cite>
+      <cite>Văn Điệp & Thu Huệ · 2019 — ∞</cite>
     </div>
   </div>
 
@@ -2481,7 +2568,7 @@
       <form class="rsvp-form reveal" id="rsvpForm"
             action="https://formspree.io/f/YOUR_FORM_ID"
             method="POST">
-        <input type="hidden" name="_subject" value="RSVP Đám cưới Điệp & Huệ 28/11/2026" />
+        <input type="hidden" name="_subject" value="RSVP Đám cưới Văn Điệp & Thu Huệ 28/11/2026" />
         <input type="hidden" name="xac_nhan" id="attendHidden" value="Tôi sẽ có mặt" />
 
         <div class="rsvp-fields">
@@ -2500,7 +2587,7 @@
           </div>
           <div class="rsvp-field full">
             <textarea id="wish" name="loi_chuc" placeholder=" "></textarea>
-            <label for="wish">Lời chúc gửi đến Điệp & Huệ</label>
+            <label for="wish">Lời chúc gửi đến Văn Điệp & Thu Huệ</label>
           </div>
         </div>
 
@@ -2540,6 +2627,9 @@
       </button>
       <button class="mp-btn" id="mpNext" aria-label="Bài tiếp">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M12 2h-1.5v10H12zM1.5 2L9 7l-7.5 5V2z"/></svg>
+      </button>
+      <button class="mp-btn mp-stop" id="mpStop" aria-label="Dừng nhạc">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><rect x="1" y="1" width="10" height="10" rx="1.5"/></svg>
       </button>
     </div>
     <div class="mp-progress"><div class="mp-progress-fill" id="mpFill"></div></div>
@@ -2594,8 +2684,6 @@
       <p class="gift-footer-note">"Cảm ơn bạn đã là một phần<br/>của ngày đặc biệt này."</p>
     </div>
 
-    <!-- Notification bubble -->
-    <div class="gift-bubble" id="giftBubble"><span class="bubble-heart">♥</span> Gửi quà tặng</div>
 
     <!-- Tab dọc giữa màn hình phải -->
     <button class="gift-tab" id="giftTab" aria-label="Gửi quà tặng">
@@ -2645,17 +2733,9 @@
     const giftTab    = document.getElementById('giftTab');
     const giftPanel  = document.getElementById('giftPanel');
     const giftClose  = document.getElementById('giftClose');
-    const giftBubble = document.getElementById('giftBubble');
-    let bubbleDismissed = false;
-
-    function hideBubble() {
-      giftBubble.classList.remove('show');
-      bubbleDismissed = true;
-    }
 
     function toggleGift(forceClose) {
       const isOpen = giftPanel.classList.contains('open');
-      hideBubble();
       if (forceClose || isOpen) {
         giftPanel.classList.remove('open');
         giftPanel.setAttribute('aria-hidden', 'true');
@@ -2671,22 +2751,6 @@
     document.addEventListener('click', e => {
       if (!e.target.closest('.gift-widget')) toggleGift(true);
     });
-
-    // Hiện bubble sau 4.5s rồi tự ẩn sau 4s
-    setTimeout(() => {
-      if (!bubbleDismissed) {
-        giftBubble.classList.add('show');
-        setTimeout(() => hideBubble(), 4000);
-      }
-    }, 4500);
-
-    // Bubble tái xuất hiện định kỳ mỗi 22s nếu panel chưa mở
-    setInterval(() => {
-      if (!giftPanel.classList.contains('open')) {
-        giftBubble.classList.add('show');
-        setTimeout(() => giftBubble.classList.remove('show'), 3500);
-      }
-    }, 22000);
 
     // Shake tab nhẹ mỗi 6s nếu panel chưa mở
     setInterval(() => {
@@ -2734,6 +2798,7 @@
     const mpToggle = document.getElementById('mpToggle');
     const mpPrev   = document.getElementById('mpPrev');
     const mpNext   = document.getElementById('mpNext');
+    const mpStop   = document.getElementById('mpStop');
     const mpTitle  = document.getElementById('mpTitle');
     const mpArtist = document.getElementById('mpArtist');
     const mpFill   = document.getElementById('mpFill');
@@ -2769,6 +2834,14 @@
     }
     function doPause() {
       audio.pause();
+    }
+    function doStop() {
+      audio.pause();
+      audio.currentTime = 0;
+      mpFill.style.width = '0%';
+      musicStarted = false;
+      setPlaying(false);
+      mpWrap.classList.remove('open');
     }
 
     audio.addEventListener('play',  () => setPlaying(true));
@@ -2831,6 +2904,10 @@
       mpIdx = (mpIdx + 1) % playlist.length;
       loadTrack(mpIdx, !audio.paused);
     });
+    mpStop.addEventListener('click', e => {
+      e.stopPropagation();
+      doStop();
+    });
 
     // Hover expand / collapse (chỉ mở rộng UI, không ảnh hưởng nhạc)
     mpWrap.addEventListener('mouseenter', () => mpWrap.classList.add('open'));
@@ -2878,10 +2955,33 @@
       });
     }
 
-    // Nav scroll
+    // Nav scroll + mobile menu
     const nav = document.getElementById('nav');
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    function closeNav() {
+      nav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    navToggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeNav);
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeNav();
     });
 
     // Scroll reveal
