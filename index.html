@@ -2470,8 +2470,10 @@
     </div>
   </section>
 
-  <!-- YouTube player ẩn — stream trực tiếp, không cần download -->
-  <div id="ytHost" style="position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;pointer-events:none;"></div>
+  <!-- Audio player ẩn -->
+  <audio id="audioPlayer" preload="auto" muted>
+    <source src="audio/01-hon-ca-yeu.mp3" type="audio/mpeg">
+  </audio>
 
   <!-- ════ MUSIC PLAYER ════ -->
   <div class="music-player" id="musicPlayer">
@@ -2669,65 +2671,28 @@
       tick(); setInterval(tick, 1000);
     })();
 
-    // ── Music Player (YouTube IFrame API) ──
-    // Cách lấy video ID: vào YouTube → tìm tên bài → copy phần sau "v=" trong URL
-    // Ví dụ: youtube.com/watch?v=ABC123xyz  →  vid: 'ABC123xyz'
+    // ── Music Player (HTML5 Audio — no ads, offline) ──
     const playlist = [
-      { title: 'Hơn Cả Yêu',             artist: 'Đức Phúc',                  vid: '__kGJZ-kPno' },
-      { title: 'Cưới Nhau Đi (Yes I Do)', artist: 'Bùi Anh Tuấn & Hiền Hồ',  vid: 'o_lN37OAJ9U' },
-      { title: 'Ngày Đầu Tiên',           artist: 'Đức Phúc',                  vid: 'rIXhXaQ8tiM' },
-      { title: 'Ngày Chung Đôi',          artist: 'Văn Mai Hương',              vid: 'gCwiaL-t2tw'  },
-      { title: 'Ta Là Của Nhau',          artist: 'Đông Nhi & Ông Cao Thắng',  vid: 'tv0ttp0bS8A'  },
-      { title: 'Cơn Mưa Tình Yêu',       artist: 'Hà Anh Tuấn & Phương Linh', vid: 'RfG-BP3HCv4'  },
+      { title: 'Hơn Cả Yêu',             artist: 'Đức Phúc',                  src: 'audio/01-hon-ca-yeu.mp3' },
+      { title: 'Cưới Nhau Đi (Yes I Do)', artist: 'Bùi Anh Tuấn & Hiền Hồ',  src: 'audio/02-cuoi-nhau-di.mp3' },
+      { title: 'Ngày Đầu Tiên',           artist: 'Đức Phúc',                  src: 'audio/03-ngay-dau-tien.mp3' },
+      { title: 'Ngày Chung Đôi',          artist: 'Văn Mai Hương',             src: 'audio/04-ngay-chung-doi.mp3' },
+      { title: 'Cơn Mưa Tình Yêu',       artist: 'Hà Anh Tuấn & Phương Linh', src: 'audio/06-con-mua-tinh-yeu.mp3' },
     ];
 
-    let mpIdx   = 0;
-    let ytPlayer = null;
-    let ytReady  = false;
-
-    const mpWrap  = document.getElementById('musicPlayer');
-    const mpToggle= document.getElementById('mpToggle');
-    const mpPrev  = document.getElementById('mpPrev');
-    const mpNext  = document.getElementById('mpNext');
-    const mpTitle = document.getElementById('mpTitle');
-    const mpArtist= document.getElementById('mpArtist');
-    const mpFill  = document.getElementById('mpFill');
-
-    // Tải YouTube IFrame API
-    (function() {
-      const s = document.createElement('script');
-      s.src = 'https://www.youtube.com/iframe_api';
-      document.head.appendChild(s);
-    })();
-
+    let mpIdx = 0;
     let musicStarted = false;
 
-    window.onYouTubeIframeAPIReady = function() {
-      ytPlayer = new YT.Player('ytHost', {
-        height: '1', width: '1',
-        videoId: playlist[0].vid,
-        playerVars: { autoplay: 0, controls: 0, rel: 0, modestbranding: 1, iv_load_policy: 3 },
-        events: {
-          onReady: function(e) {
-            ytReady = true;
-            e.target.setVolume(32);
-          },
-          onStateChange: function(e) {
-            const S = YT.PlayerState;
-            if (e.data === S.PLAYING)  setPlaying(true);
-            if (e.data === S.PAUSED)   setPlaying(false);   // chỉ dừng UI khi user bấm pause
-            if (e.data === S.ENDED) {
-              mpIdx = (mpIdx + 1) % playlist.length;
-              loadTrack(mpIdx, true);
-            }
-          },
-          onError: function() {
-            mpIdx = (mpIdx + 1) % playlist.length;
-            loadTrack(mpIdx, true);
-          }
-        }
-      });
-    };
+    const audio    = document.getElementById('audioPlayer');
+    const mpWrap   = document.getElementById('musicPlayer');
+    const mpToggle = document.getElementById('mpToggle');
+    const mpPrev   = document.getElementById('mpPrev');
+    const mpNext   = document.getElementById('mpNext');
+    const mpTitle  = document.getElementById('mpTitle');
+    const mpArtist = document.getElementById('mpArtist');
+    const mpFill   = document.getElementById('mpFill');
+
+    audio.volume = 0.35;
 
     function updateInfo(idx) {
       mpTitle.textContent  = playlist[idx].title;
@@ -2737,9 +2702,15 @@
 
     function loadTrack(idx, play) {
       updateInfo(idx);
-      if (!ytReady || !ytPlayer) return;
-      play ? ytPlayer.loadVideoById(playlist[idx].vid)
-           : ytPlayer.cueVideoById(playlist[idx].vid);
+      audio.src = playlist[idx].src;
+      if (play) {
+        const tryPlay = () => audio.play().then(() => { musicStarted = true; }).catch(() => {});
+        if (audio.readyState >= 2) {
+          tryPlay();
+        } else {
+          audio.addEventListener('canplay', tryPlay, { once: true });
+        }
+      }
     }
 
     function setPlaying(on) {
@@ -2748,45 +2719,71 @@
     }
 
     function doPlay() {
-      if (ytPlayer && ytReady) { ytPlayer.playVideo(); musicStarted = true; }
+      audio.play().then(() => { musicStarted = true; }).catch(() => {});
     }
     function doPause() {
-      if (ytPlayer && ytReady) ytPlayer.pauseVideo();
+      audio.pause();
     }
 
-    // Progress bar
-    setInterval(() => {
-      if (!ytPlayer || !ytReady) return;
-      const dur = ytPlayer.getDuration?.() || 0;
-      const cur = ytPlayer.getCurrentTime?.() || 0;
-      if (dur > 0) mpFill.style.width = (cur / dur * 100) + '%';
-    }, 800);
+    audio.addEventListener('play',  () => setPlaying(true));
+    audio.addEventListener('pause', () => setPlaying(false));
+    audio.addEventListener('ended', () => {
+      mpIdx = (mpIdx + 1) % playlist.length;
+      loadTrack(mpIdx, true);
+    });
+    audio.addEventListener('error', () => {
+      mpIdx = (mpIdx + 1) % playlist.length;
+      setTimeout(() => loadTrack(mpIdx, true), 300);
+    });
 
-    // Click đầu tiên bất kỳ đâu trên trang → bật nhạc (trình duyệt cho phép âm thanh sau gesture)
-    document.addEventListener('click', function autoStart(e) {
-      if (musicStarted) { document.removeEventListener('click', autoStart); return; }
-      if (e.target.closest('#musicPlayer')) return; // player tự xử lý
-      doPlay();
-      document.removeEventListener('click', autoStart);
+    // Progress bar
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration > 0) {
+        mpFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      }
+    });
+
+    // Bước 1: Phát muted ngay khi audio sẵn sàng (bypass autoplay policy)
+    audio.muted = true;
+    if (audio.readyState >= 2) {
+      audio.play().catch(() => {});
+    } else {
+      audio.addEventListener('canplay', function startMuted() {
+        audio.play().catch(() => {});
+        audio.removeEventListener('canplay', startMuted);
+      });
+    }
+
+    // Bước 2: Unmute khi user tương tác bất kỳ
+    function unmute() {
+      audio.muted = false;
+      audio.volume = 0.35;
+      if (audio.paused) audio.play().catch(() => {});
+      musicStarted = true;
+    }
+    ['click','scroll','touchstart','keydown','mousemove'].forEach(evt => {
+      document.addEventListener(evt, function handler() {
+        unmute();
+        document.removeEventListener(evt, handler);
+      }, { once: true, passive: true });
     });
 
     // Nút play/pause
     mpToggle.addEventListener('click', e => {
       e.stopPropagation();
-      if (!ytPlayer || !ytReady) return;
-      ytPlayer.getPlayerState() === YT.PlayerState.PLAYING ? doPause() : doPlay();
+      audio.paused ? doPlay() : doPause();
     });
 
     // Prev / Next
     mpPrev.addEventListener('click', e => {
       e.stopPropagation();
       mpIdx = (mpIdx - 1 + playlist.length) % playlist.length;
-      loadTrack(mpIdx, musicStarted);
+      loadTrack(mpIdx, !audio.paused);
     });
     mpNext.addEventListener('click', e => {
       e.stopPropagation();
       mpIdx = (mpIdx + 1) % playlist.length;
-      loadTrack(mpIdx, musicStarted);
+      loadTrack(mpIdx, !audio.paused);
     });
 
     // Hover expand / collapse (chỉ mở rộng UI, không ảnh hưởng nhạc)
@@ -2795,8 +2792,6 @@
       if (mpWrap.classList.contains('playing')) return;
       mpWrap.classList.remove('open');
     });
-
-    updateInfo(0);
 
     // ── RSVP attend toggle ──
     const attendYes = document.getElementById('attendYes');
