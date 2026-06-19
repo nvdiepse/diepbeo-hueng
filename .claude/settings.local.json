@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open *)",
+      "Bash(ngrok version *)",
+      "Bash(python3 -m http.server 8765)",
+      "Bash(curl -s http://localhost:8765)",
+      "Bash(ngrok http *)",
+      "Bash(curl -s http://localhost:4040/api/tunnels)",
+      "Bash(python3 -c \"import sys,json; t=json.load\\(sys.stdin\\)['tunnels']; print\\(t[0]['public_url']\\)\")",
+      "Bash(curl -sI \"https://source.unsplash.com/400x300/?wedding,couple\")",
+      "Bash(curl -sI \"https://loremflickr.com/640/480/wedding,couple?lock=1\")",
+      "Bash(python3 *)",
+      "WebSearch"
+    ]
+  }
+}
