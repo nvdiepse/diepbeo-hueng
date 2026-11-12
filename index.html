@@ -12,8 +12,8 @@
   <meta property="og:title" content="Ngô Văn Điệp &amp; Nguyễn Thu Huệ — Đám Cưới 28 &amp; 29/11/2026" />
   <meta property="og:description" content="Trân trọng mời bạn đến chứng kiến ngày Ngô Văn Điệp &amp; Nguyễn Thu Huệ về chung một nhà. 28.11 Nhà Gái · 29.11 Nhà Trai" />
   <meta property="og:site_name" content="Ngô Văn Điệp &amp; Nguyễn Thu Huệ — Đám Cưới" />
-  <meta property="og:image" content="https://diep-hueng-wedding.vercel.app/images/og-share.jpg?v=20261113h" />
-  <meta property="og:image:secure_url" content="https://diep-hueng-wedding.vercel.app/images/og-share.jpg?v=20261113h" />
+  <meta property="og:image" content="https://diep-hueng-wedding.vercel.app/images/og-banner.jpg" />
+  <meta property="og:image:secure_url" content="https://diep-hueng-wedding.vercel.app/images/og-banner.jpg" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="628" />
@@ -26,14 +26,14 @@
   <meta name="theme-color" content="#d4708a" />
   <meta name="color-scheme" content="light" />
   <link rel="canonical" href="https://diep-hueng-wedding.vercel.app/" />
-  <link rel="image_src" href="https://diep-hueng-wedding.vercel.app/images/og-share.jpg?v=20261113h" />
+  <link rel="image_src" href="https://diep-hueng-wedding.vercel.app/images/og-banner.jpg" />
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://diep-hueng-wedding.vercel.app/" />
   <meta name="twitter:title" content="Ngô Văn Điệp &amp; Nguyễn Thu Huệ — Đám Cưới 28 &amp; 29/11/2026" />
   <meta name="twitter:description" content="Trân trọng mời bạn chứng kiến ngày chúng tôi về cùng một nhà. 28.11 Nhà Gái · 29.11 Nhà Trai" />
-  <meta name="twitter:image" content="https://diep-hueng-wedding.vercel.app/images/og-share.jpg?v=20261113h" />
+  <meta name="twitter:image" content="https://diep-hueng-wedding.vercel.app/images/og-banner.jpg" />
 
   <!-- Schema.org Event -->
   <script type="application/ld+json">
@@ -42,7 +42,7 @@
     "@type": "Event",
     "name": "Lễ cưới Ngô Văn Điệp & Nguyễn Thu Huệ",
     "description": "Trân trọng mời bạn dự lễ cưới Ngô Văn Điệp & Nguyễn Thu Huệ — Lễ Vu Quy 28.11.2026 & Lễ Thành Hôn 29.11.2026.",
-    "image": ["https://diep-hueng-wedding.vercel.app/images/og-share.jpg?v=20261113h"],
+    "image": ["https://diep-hueng-wedding.vercel.app/images/og-banner.jpg"],
     "url": "https://diep-hueng-wedding.vercel.app/",
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
     "eventStatus": "https://schema.org/EventScheduled",
@@ -4238,10 +4238,15 @@
 
   <script>
     // ── Invite modal + khách mời từ URL (ten-khach-moi, khach-moi) ──
+    // Ưu tiên ?query; fallback #hash — Messenger scrape bỏ hash nên preview dùng chung OG trang chủ
     (function () {
-      const params = new URLSearchParams(window.location.search);
-      const guestName = (params.get('ten-khach-moi') || params.get('ten_khach_moi') || '').trim();
-      const guestSideRaw = params.get('khach-moi') || params.get('khach_moi') || '';
+      const searchParams = new URLSearchParams(window.location.search);
+      const hashParams = new URLSearchParams(
+        (window.location.hash || '').replace(/^#/, '').replace(/^\?/, '')
+      );
+      const param = (key) => searchParams.get(key) || hashParams.get(key) || '';
+      const guestName = (param('ten-khach-moi') || param('ten_khach_moi') || '').trim();
+      const guestSideRaw = param('khach-moi') || param('khach_moi') || '';
 
       const INVITE_DAYS = {
         gai: { rsvpValue: '28/11 — Lễ Vu Quy (Nhà Gái, Thái Nguyên)' },
